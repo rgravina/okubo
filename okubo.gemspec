@@ -3,7 +3,7 @@ require File.expand_path('../lib/okubo/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Robert Gravina"]
-  gem.email         = ["robert@gravina.com"]
+  gem.email         = ["robert.gravina@gmail.com"]
   gem.description   = %q{Okubo - a simple spaced-repetition gem.}
   gem.summary       = %q{Okubo is a simple spaced-repetition gem for learning words and definitions in a foreign language.}
   gem.homepage      = ""
