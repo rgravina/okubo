@@ -1,7 +1,8 @@
-RSpec.configure do |config|
-  # Use color in STDOUT
-  config.color_enabled = true
+require 'active_record'
+require 'sqlite3'
+require 'okubo'
 
-  # Use color not only in STDOUT but also in pagers and files
-  config.tty = true
-end
+ActiveRecord::Base.establish_connection(
+  :adapter => "sqlite3",
+  :database => ":memory:"
+)
