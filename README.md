@@ -1,19 +1,22 @@
 Okubo
 =====
 
-Okubo is a simple spaced-repetition gem for learning words and definitions in a foreign language.
+Okubo is a simple spaced-repetition system which you can associate with Active Record models. It can be used, for example
+for learning words and definitions in a foreign language.
 
-TODO: implement it :)
+Installation
+------------
 
-Examples
---------
-    # add words and definitions to your database
-    o = Okubo.new
-    o.add_word("日本語", "にほんご", "Japanese (language)")
+Quick Start
+-----------
 
-    #....    
-    o.words.count # 1
-    # study those needing review
-    o.pending_words.each do |word|
-      puts word
-    end
+Authors and Contributors
+------------------------
+
+Originally authored by Robert Gravina, waiting on the first contributor :) 
+
+Thanks!
+-------
+
+The design and implementation of this gem (and even this README!) was heavily influenced by the [ActiveRecord Reputation System](https://github.com/twitter/activerecord-reputation-system) gem.
+Thanks to the authors and contributors of 
