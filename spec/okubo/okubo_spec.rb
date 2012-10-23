@@ -1,5 +1,4 @@
 require 'spec_helper'
-require "#{File.dirname(__FILE__)}/../lib/okubo"
 
 describe Okubo do
   describe "adding words" do
