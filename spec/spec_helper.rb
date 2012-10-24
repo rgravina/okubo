@@ -12,12 +12,14 @@ ActiveRecord::Migration.verbose = false
 ActiveRecord::Schema.define do
   create_table :okubu_items do |t|
     t.references  :item, :polymorphic => true
+    t.references  :user, :polymorphic => true
     t.integer     :right, :default => 0
     t.integer     :wrong, :default => 0
     t.integer     :box, :default => 0
     t.timestamps
   end
   add_index :okubu_items, [:item_id, :item_type]
+  add_index :okubu_items, [:user_id, :user_type]
 
   create_table :words do |t|
     t.string :kanji
@@ -28,4 +30,5 @@ ActiveRecord::Schema.define do
 end
 
 class Word < ActiveRecord::Base
+  #has_study_schedule
 end
