@@ -25,3 +25,4 @@ Thanks!
 -------
 
 * [activerecord-reputation-system](https://github.com/twitter/activerecord-reputation-system/) - for providing the design and implementation from which this gem is based.
+* [randym](https://github.com/randym/) - for enouraging me work on this gem in the first place
