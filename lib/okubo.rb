@@ -1,5 +1,4 @@
+require 'okubo/base'
 require "okubo/version"
 
-module Okubo
-  # Your code goes here...
-end
+ActiveRecord::Base.send(:include, Okubo::Base)

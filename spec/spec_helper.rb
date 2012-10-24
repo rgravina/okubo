@@ -10,7 +10,7 @@ ActiveRecord::Base.establish_connection(
 ActiveRecord::Migration.verbose = false
 
 ActiveRecord::Schema.define do
-  create_table :okubu_items do |t|
+  create_table :okubu_item_statistics do |t|
     t.references  :item, :polymorphic => true
     t.references  :user, :polymorphic => true
     t.integer     :right, :default => 0
@@ -18,8 +18,8 @@ ActiveRecord::Schema.define do
     t.integer     :box, :default => 0
     t.timestamps
   end
-  add_index :okubu_items, [:item_id, :item_type]
-  add_index :okubu_items, [:user_id, :user_type]
+  add_index :okubu_item_statistics, [:item_id, :item_type]
+  add_index :okubu_item_statistics, [:user_id, :user_type]
 
   create_table :words do |t|
     t.string :kanji
@@ -30,5 +30,5 @@ ActiveRecord::Schema.define do
 end
 
 class Word < ActiveRecord::Base
-  #has_study_schedule
+  has_study_schedule
 end
