@@ -27,3 +27,7 @@ Thanks!
 * [activerecord-reputation-system](https://github.com/twitter/activerecord-reputation-system/) - for providing the design and implementation from which this gem is based.
 * [randym](https://github.com/randym/) - for enouraging me work on this gem in the first place.
 * [Tokyo Rails](http://www.tokyorails.com/) - for providing collaboration evenings where this gem was worked on.
+
+Copyright and License
+---------------------
+Okubo © 2012 by Robert Gravina. Okubo is licensed under the MIT license. Please see the LICENSE document for more information.
