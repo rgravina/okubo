@@ -25,6 +25,7 @@ Thanks!
 * [activerecord-reputation-system](https://github.com/twitter/activerecord-reputation-system/) - for providing the design and implementation from which this gem is based.
 * [randym](https://github.com/randym/) - for enouraging me work on this gem in the first place.
 * [Tokyo Rails](http://www.tokyorails.com/) - for providing collaboration evenings where this gem was worked on.
+* [Reviewing the Kanji](http://kanji.koohii.com/) - for providing a great visual representation of the Leitner system and names for the stacks.
 
 Copyright and License
 ---------------------
