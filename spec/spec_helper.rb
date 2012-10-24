@@ -10,16 +10,11 @@ ActiveRecord::Base.establish_connection(
 ActiveRecord::Migration.verbose = false
 
 ActiveRecord::Schema.define do
-  create_table :okubu_item_statistics do |t|
-    t.references  :item, :polymorphic => true
+  create_table :okubo_deck do |t|
     t.references  :user, :polymorphic => true
-    t.integer     :right, :default => 0
-    t.integer     :wrong, :default => 0
-    t.integer     :box, :default => 0
     t.timestamps
   end
-  add_index :okubu_item_statistics, [:item_id, :item_type]
-  add_index :okubu_item_statistics, [:user_id, :user_type]
+  add_index :okubo_deck, [:user_id, :user_type]
 
   create_table :words do |t|
     t.string :kanji
@@ -27,8 +22,16 @@ ActiveRecord::Schema.define do
     t.string :translation
     t.timestamps
   end
+
+  create_table :users do |t|
+    t.string :name
+    t.timestamps
+  end
 end
 
 class Word < ActiveRecord::Base
-  has_study_schedule
+end
+
+class User < ActiveRecord::Base
+  has_deck_of :word
 end

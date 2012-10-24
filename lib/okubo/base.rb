@@ -6,7 +6,7 @@ module Okubo
   end
   
   module ClassMethods
-    def has_study_schedule
+    def has_deck_of(item)
     end
   end
 end
