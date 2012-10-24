@@ -9,8 +9,6 @@ next.
 Okubo schedules items into boxes and uses this to determine the next study time for an item, based on the [Leitner System](http://en.wikipedia.org/wiki/Leitner_system).
 In the future it may support other popular algorithms, such as the Supermemo 2 algorithm (SM2).
 
-Originally authored by Robert Gravina.
-
 Installation
 ------------
 
