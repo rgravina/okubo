@@ -17,7 +17,25 @@ Coming soon ...
 Quick Start
 -----------
 
-Coming soon ...
+Imagine you have an application allowing your users to study words in a foreign language. You can set this up as follows:
+
+```ruby
+class Word < ActiveRecord::Base
+end
+
+class User < ActiveRecord::Base
+  has_deck_of :word
+end
+
+user = User.create!(:name => "Robert")
+word = Word.create!(:kanji => "日本語", :kana => "にほんご", :translation => "Japanese language")
+```
+
+This gives your user a deck of words to study, initially empty:
+
+```ruby
+user.deck #=> []
+```
 
 Thanks!
 -------
