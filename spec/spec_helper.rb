@@ -33,5 +33,5 @@ class Word < ActiveRecord::Base
 end
 
 class User < ActiveRecord::Base
-  has_deck_of :word
+  has_deck :words
 end

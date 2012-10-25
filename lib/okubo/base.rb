@@ -6,7 +6,10 @@ module Okubo
   end
   
   module ClassMethods
-    def has_deck_of(item)
+    def has_deck(name)
+      define_method(:deck_name){name}
+      include Okubo::StudyMethods
+      after_create(:add_deck)
     end
   end
 end
