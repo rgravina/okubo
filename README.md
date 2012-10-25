@@ -37,6 +37,14 @@ This gives your user a deck of words to study, initially empty:
 user.words #=> []
 ```
 
+Adding words to the deck adds it to the word list. It also belongs to the 'untested' stack:
+
+```ruby
+user.words << word
+user.words #=> [word]
+user.words.untested #=> [word]
+```
+
 Thanks!
 -------
 
