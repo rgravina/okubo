@@ -24,7 +24,7 @@ class Word < ActiveRecord::Base
 end
 
 class User < ActiveRecord::Base
-  has_deck_of :word
+  has_deck :words
 end
 
 user = User.create!(:name => "Robert")
@@ -34,7 +34,7 @@ word = Word.create!(:kanji => "日本語", :kana => "にほんご", :translation
 This gives your user a deck of words to study, initially empty:
 
 ```ruby
-user.deck #=> []
+user.words #=> []
 ```
 
 Thanks!
