@@ -10,12 +10,21 @@ ActiveRecord::Base.establish_connection(
 ActiveRecord::Migration.verbose = false
 
 ActiveRecord::Schema.define do
-  create_table :okubo_deck do |t|
+  # Okubo tables
+  create_table :okubo_decks do |t|
     t.references  :user, :polymorphic => true
     t.timestamps
   end
-  add_index :okubo_deck, [:user_id, :user_type]
+  add_index :okubo_decks, [:user_id, :user_type]
 
+  create_table :okubo_items do |t|
+    t.references  :deck
+    t.references  :source, :polymorphic => true
+    t.timestamps
+  end
+  add_index :okubo_items, [:source_id, :source_type]
+
+  # Test application tables
   create_table :words do |t|
     t.string :kanji
     t.string :kana
@@ -29,6 +38,7 @@ ActiveRecord::Schema.define do
   end
 end
 
+# Test application models
 class Word < ActiveRecord::Base
 end
 
