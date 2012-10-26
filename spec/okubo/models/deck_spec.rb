@@ -22,6 +22,12 @@ describe Okubo::Deck do
   end
 
   context "Cleaning up" do
-    it "should delete itself and all item information when the source model is deleted"
+    it "should delete itself and all item information when the source model is deleted" do
+      deck = @user.words
+      @user.destroy
+      Okubo::Deck.exists?(:user_id => @user.id).should be_false
+      Okubo::Item.exists?(:deck_id => deck.id).should be_false
+      @word.destroyed?.should be_false
+    end
   end
 end

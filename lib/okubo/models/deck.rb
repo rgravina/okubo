@@ -2,7 +2,7 @@ module Okubo
   class Deck < ActiveRecord::Base
     self.table_name = "okubo_decks"
     belongs_to :user, :polymorphic => true
-    has_many :items, :class_name => "Okubo::Item"
+    has_many :items, :class_name => "Okubo::Item", :dependent => :destroy
     
     def self.add_deck(user)
       create!(user)

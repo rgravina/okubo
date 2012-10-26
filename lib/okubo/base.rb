@@ -10,6 +10,7 @@ module Okubo
       define_method(:deck_name){name}
       include Okubo::StudyMethods
       after_create(:add_deck)
+      after_destroy(:remove_deck)
     end
   end
 end
