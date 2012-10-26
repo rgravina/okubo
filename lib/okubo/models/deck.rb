@@ -24,6 +24,10 @@ module Okubo
       source_class.find(self.items.untested.pluck(:source_id))
     end
 
+    def failed
+      source_class.find(self.items.failed.pluck(:source_id))
+    end
+
     def source_class
       user.deck_name.to_s.singularize.titleize.constantize
     end

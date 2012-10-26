@@ -19,7 +19,11 @@ describe Okubo::Item do
       @user.words.box(1).should == [@word]
     end
 
-    it "incorrect answer should move it to the failed stack"
+    it "incorrect answer should move it to the failed stack" do
+      @user.wrong_answer_for!(@word)
+      @user.words.untested.should == []
+      @user.words.failed.should == [@word]
+    end
   end
 
   context "Study schedule" do
