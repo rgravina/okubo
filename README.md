@@ -1,4 +1,4 @@
-Okubo
+Okubo [![Build Status](https://travis-ci.org/rgravina/okubo.png)](https://travis-ci.org/rgravina/okubo)
 =====
 
 Okubo is a simple spaced-repetition system which you can associate with Active Record models to be learned
