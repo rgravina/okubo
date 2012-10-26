@@ -27,7 +27,10 @@ describe Okubo::Item do
   end
 
   context "Study schedule" do
-    it "when untested, next study time should be nil"
+    it "when untested, next study time should be nil" do
+      @word.stats.last_reviewed.should be_nil
+    end
+
     it "when correct for the first time, next study time should be in one day"
   end
 end
