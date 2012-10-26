@@ -8,7 +8,7 @@ module Okubo
   module ClassMethods
     def has_deck(name)
       define_method(:deck_name){name}
-      include Okubo::StudyMethods
+      include Okubo::DeckMethods
       after_create(:add_deck)
       after_destroy(:remove_deck)
     end

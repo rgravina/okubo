@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require 'spec_helper'
 
-describe Okubo::StudyMethods do
+describe Okubo::DeckMethods do
   before(:each) do
     @word = Word.create!(:kanji => "日本語", :kana => "にほんご", :translation => "Japanese language")
     @user = User.create!(:name => "Robert")
