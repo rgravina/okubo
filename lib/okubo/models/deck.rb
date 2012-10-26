@@ -28,12 +28,20 @@ module Okubo
       source_class.find(self.items.failed.pluck(:source_id))
     end
 
-    def source_class
-      user.deck_name.to_s.singularize.titleize.constantize
+    def known
+      source_class.find(self.items.known.pluck(:source_id))
+    end
+
+    def expired
+      source_class.find(self.items.expired.pluck(:source_id))
     end
 
     def box(number)
       source_class.find(self.items.where(:box =>  number).pluck(:source_id))
+    end
+
+    def source_class
+      user.deck_name.to_s.singularize.titleize.constantize
     end
   end
 end
