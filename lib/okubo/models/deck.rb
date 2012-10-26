@@ -10,9 +10,9 @@ module Okubo
 
     def ==(other)
       if other.respond_to?(:items)
-        self.items.map(&:source) == other.items
+        source_class.find(self.items.pluck(:source_id)) == other.items
       else
-        self.items.map(&:source) == other
+        source_class.find(self.items.pluck(:source_id)) == other
       end
     end
 
@@ -21,7 +21,11 @@ module Okubo
     end
 
     def untested
-      self.items.untested.map(&:source)
+      source_class.find(self.items.untested.pluck(:source_id))
+    end
+
+    def source_class
+      user.deck_name.to_s.singularize.titleize.constantize
     end
   end
 end
