@@ -45,6 +45,20 @@ user.words #=> [word]
 user.words.untested #=> [word]
 ```
 
+These words can be studied immediately. Answering a word correctly moves it out of the 'untested' stack:
+
+```ruby
+user.right_answer_for!(word)
+user.words.untested  == []
+```
+
+Answering a word incorrectly moves it into the 'failed' stack:
+
+```ruby
+user.wrong_answer_for!(word)
+user.words.failed #=> [word]
+```
+
 Thanks!
 -------
 
