@@ -48,7 +48,7 @@ user.words.untested #=> [word]
 ```
 
 These words can be studied immediately. Answering a word correctly moves it out of the 'untested' stack
-and into your list of 'known' words. It also determines the best time to review the word based on previous results.
+and into your list of 'known' words.
 
 ```ruby
 user.right_answer_for!(word)
@@ -77,7 +77,7 @@ Thanks!
 * [activerecord-reputation-system](https://github.com/twitter/activerecord-reputation-system/) - for providing the design and implementation from which this gem is based.
 * [randym](https://github.com/randym/) - for enouraging me work on this gem in the first place.
 * [Tokyo Rails](http://www.tokyorails.com/) - for providing collaboration evenings where this gem was worked on.
-* [Reviewing the Kanji](http://kanji.koohii.com/) - for providing a great visual representation of the Leitner system and names for the stacks.
+* [Reviewing the Kanji](http://kanji.koohii.com/) - for providing a great visual representation and implementation of the Leitner system.
 
 Copyright and License
 ---------------------
