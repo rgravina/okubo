@@ -64,7 +64,24 @@ user.words.known #=> []
 user.words.expired #=> [word]
 ```
 
-Finally, answering a word incorrectly moves it into the 'failed' stack:
+Answering a word correcly several times in a row results in the word taking longer to 'expire'.
+This helps ensure words are remembered.
+
+```ruby
+# Three days later...
+user.words.expired #=> [word]
+user.right_answer_for!(word)
+
+# One week later...
+user.words.expired #=> [word]
+user.right_answer_for!(word)
+
+# Two weeks later...
+user.words.expired #=> [word]
+user.right_answer_for!(word)
+```
+
+Finally, answering a word incorrectly moves it into the 'failed' stack.
 
 ```ruby
 user.wrong_answer_for!(word)
