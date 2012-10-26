@@ -65,7 +65,7 @@ user.words.expired #=> [word]
 ```
 
 Answering a word correcly several times in a row results in the word taking longer to 'expire'.
-This helps ensure words are remembered.
+This spaced repetition helps ensure the word stays in your long term memory without needless repetition.
 
 ```ruby
 user.right_answer_for!(word)
@@ -75,6 +75,8 @@ user.right_answer_for!(word)
 # Two weeks later...
 user.words.expired #=> [word]
 user.right_answer_for!(word)
+# One month later...
+user.words.expired #=> [word]
 ```
 
 Finally, answering a word incorrectly moves it into the 'failed' stack.
