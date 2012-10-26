@@ -68,14 +68,10 @@ Answering a word correcly several times in a row results in the word taking long
 This helps ensure words are remembered.
 
 ```ruby
-# Three days later...
-user.words.expired #=> [word]
 user.right_answer_for!(word)
-
 # One week later...
 user.words.expired #=> [word]
 user.right_answer_for!(word)
-
 # Two weeks later...
 user.words.expired #=> [word]
 user.right_answer_for!(word)
