@@ -8,6 +8,14 @@ module Okubo
       create!(user)
     end
 
+    def ==(other)
+      if other.respond_to?(:items)
+        self.items.map(&:source) == other.items
+      else
+        self.items.map(&:source) == other
+      end
+    end
+
     def <<(source)
       self.items << Okubo::Item.new(:deck => self, :source_id => source.id, :source_type => source.class.name)
     end

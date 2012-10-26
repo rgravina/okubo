@@ -10,7 +10,7 @@ describe Okubo::Deck do
   context "Managing word lists" do
     it "should add words to the word list" do
       @user.words << @word
-      @user.words.items.map(&:source).should == [@word]
+      @user.words.should == [@word]
     end
   end
 end

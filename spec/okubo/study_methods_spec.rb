@@ -10,8 +10,7 @@ describe Okubo::StudyMethods do
   context "Decks" do
     describe "#words" do
       it "should return an empty list when empty" do
-        deck = @user.words
-        deck.items.should == []
+        @user.words.should == []
       end
     end
   end
