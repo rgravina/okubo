@@ -47,11 +47,22 @@ user.words #=> [word]
 user.words.untested #=> [word]
 ```
 
-These words can be studied immediately. Answering a word correctly moves it out of the 'untested' stack:
+These words can be studied immediately. Answering a word correctly moves it out of the 'untested' stack
+and into your list of 'known' words. It also determines the best time to review the word based on previous results.
 
 ```ruby
 user.right_answer_for!(word)
 user.words.untested #=> []
+user.words.known #=> [word]
+```
+
+As time passes, words 'expire' and require you to review them to ensure you still remember them:
+
+```ruby
+user.right_answer_for!(word)
+# Three days later...
+user.words.known #=> []
+user.words.expired #=> [word]
 ```
 
 Answering a word incorrectly moves it into the 'failed' stack:
