@@ -27,5 +27,9 @@ module Okubo
     def source_class
       user.deck_name.to_s.singularize.titleize.constantize
     end
+
+    def box(number)
+      source_class.find(self.items.where(:box =>  number).pluck(:source_id))
+    end
   end
 end
