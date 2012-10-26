@@ -51,7 +51,7 @@ These words can be studied immediately. Answering a word correctly moves it out 
 
 ```ruby
 user.right_answer_for!(word)
-user.words.untested  == []
+user.words.untested #=> []
 ```
 
 Answering a word incorrectly moves it into the 'failed' stack:
