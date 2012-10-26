@@ -59,13 +59,12 @@ user.words.known #=> [word]
 As time passes, words 'expire' and require you to review them to ensure you still remember them:
 
 ```ruby
-user.right_answer_for!(word)
-# Three days later...
+u Three days later...
 user.words.known #=> []
 user.words.expired #=> [word]
 ```
 
-Answering a word incorrectly moves it into the 'failed' stack:
+Finally, answering a word incorrectly moves it into the 'failed' stack:
 
 ```ruby
 user.wrong_answer_for!(word)
