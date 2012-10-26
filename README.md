@@ -59,7 +59,7 @@ user.words.known #=> [word]
 As time passes, words 'expire' and require you to review them to ensure you still remember them:
 
 ```ruby
-u Three days later...
+# Three days later...
 user.words.known #=> []
 user.words.expired #=> [word]
 ```
