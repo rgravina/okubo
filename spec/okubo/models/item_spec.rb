@@ -8,7 +8,10 @@ describe Okubo::Deck do
   end
 
   context "Leitner box movement" do
-    it "should start off in the untested stack"
+    it "should start off in the untested stack" do
+      @user.words << @word
+      @user.words.untested.should == [@word]
+    end
     it "correct answer should move it up one stack"
     it "incorrect answer should move it to the failed stack"
   end

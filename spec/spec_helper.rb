@@ -20,6 +20,8 @@ ActiveRecord::Schema.define do
   create_table :okubo_items do |t|
     t.references  :deck
     t.references  :source, :polymorphic => true
+    t.integer     :box, :default => 0
+    t.timestamp   :last_reviewed
     t.timestamps
   end
   add_index :okubo_items, [:source_id, :source_type]

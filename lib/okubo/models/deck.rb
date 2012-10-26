@@ -19,5 +19,9 @@ module Okubo
     def <<(source)
       self.items << Okubo::Item.new(:deck => self, :source_id => source.id, :source_type => source.class.name)
     end
+
+    def untested
+      self.items.untested.map(&:source)
+    end
   end
 end
