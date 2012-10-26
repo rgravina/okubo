@@ -1,5 +1,6 @@
 require 'active_record'
 require 'sqlite3'
+require 'timecop'
 require 'okubo'
 
 ActiveRecord::Base.establish_connection(

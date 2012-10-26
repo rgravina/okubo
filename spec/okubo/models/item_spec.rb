@@ -28,9 +28,25 @@ describe Okubo::Item do
 
   context "Study schedule" do
     it "when untested, next study time should be nil" do
-      @word.stats.last_reviewed.should be_nil
+      @word.stats.next_review_time.should be_nil
     end
 
-    it "when correct for the first time, next study time should be in one day"
+    it "when correct, next study time should gradually increase" do
+      Timecop.freeze
+      @user.right_answer_for!(@word)
+      @word.stats.next_review_time.should == Time.now + 3.days
+      @user.right_answer_for!(@word)
+      @word.stats.next_review_time.should == Time.now + 7.days
+      @user.right_answer_for!(@word)
+      @word.stats.next_review_time.should == Time.now + 14.days
+      @user.right_answer_for!(@word)
+      @word.stats.next_review_time.should == Time.now + 30.days
+      @user.right_answer_for!(@word)
+      @word.stats.next_review_time.should == Time.now + 60.days
+      @user.right_answer_for!(@word)
+      @word.stats.next_review_time.should == Time.now + 120.days
+      @user.right_answer_for!(@word)
+      @word.stats.next_review_time.should == Time.now + 240.days
+    end
   end
 end
