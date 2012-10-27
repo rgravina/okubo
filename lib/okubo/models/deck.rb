@@ -17,7 +17,17 @@ module Okubo
     end
 
     def <<(source)
+      raise ArgumentError.new("Word already in the stack") if include?(source)
       self.items << Okubo::Item.new(:deck => self, :source_id => source.id, :source_type => source.class.name)
+    end
+
+    def delete(source)
+      item = Okubo::Item.new(:deck => self, :source_id => source.id, :source_type => source.class.name)
+      item.destroy
+    end
+
+    def include?(source)
+      Okubo::Item.exists?(:deck_id => self.id, :source_id => source.id, :source_type => source.class.name)
     end
 
     def untested

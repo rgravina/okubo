@@ -12,8 +12,18 @@ describe Okubo::Deck do
       @user.words << @word
       @user.words.should == [@word]
     end
-    it "should raise an error if a duplicate word exists"
-    it "should remove words from the word list (but not the model itself)"
+
+    it "should raise an error if a duplicate word exists" do
+      @user.words << @word
+      @user.words.should == [@word]
+      expect{@user.words << @word}.to raise_error(ArgumentError)
+    end
+
+    it "should remove words from the word list (but not the model itself)" do
+      @user.words.delete(@word)
+      @user.words.include?(@word).should be_false
+      @word.destroyed?.should be_false
+    end
   end
 
   context "Cleaning up" do
