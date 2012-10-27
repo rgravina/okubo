@@ -79,11 +79,19 @@ user.right_answer_for!(word)
 user.words.expired #=> [word]
 ```
 
-Finally, answering a word incorrectly moves it into the 'failed' stack.
+Finally, answering a word incorrectly moves it into the 'failed' stack. The word can then be
+studied at any time (similar to words in the 'untested' stack) which puts it back in the review
+cycle.
 
 ```ruby
 user.wrong_answer_for!(word)
 user.words.failed #=> [word]
+user.right_answer_for!(word)
+user.words.failed #=> []
+user.words.known #=> [word]
+# Three days later...
+user.words.known #=> []
+user.words.expired #=> [word]
 ```
 
 Thanks!
