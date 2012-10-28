@@ -12,9 +12,19 @@ In the future it may support other popular algorithms, such as the Supermemo 2 a
 Installation
 ------------
 
-The API and code is in flux right now in these very early stages, so we don't recommend using it seriously just yet - 
-however, the moment you can install it (meaning the appropriate rails migration generators exist) 
-you'll see the instructions right here.
+Add to Gemfile (will put on rubygems once at 0.1):
+
+```
+gem 'okubo', :git => "git://github.com/rgravina/okubo.git"
+```
+
+Run:
+
+```
+bundle install
+rails generate okubo
+rake db:migrate
+```
 
 Quick Start
 -----------
