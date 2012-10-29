@@ -21,6 +21,10 @@ module Okubo
       self.items << Okubo::Item.new(:deck => self, :source_id => source.id, :source_type => source.class.name)
     end
 
+    def count
+      self.items.count
+    end
+
     def delete(source)
       item = Okubo::Item.new(:deck => self, :source_id => source.id, :source_type => source.class.name)
       item.destroy

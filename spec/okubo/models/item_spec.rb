@@ -9,6 +9,11 @@ describe Okubo::Item do
   end
 
   context "Leitner box movement" do
+    it "should present a list of all words" do
+      @user.words.should == [@word]
+      @user.words.count.should == 1
+    end
+
     it "should start off in the untested stack" do
       @user.words.untested.should == [@word]
     end
