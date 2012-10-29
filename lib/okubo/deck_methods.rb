@@ -1,6 +1,7 @@
 module Okubo
   module DeckMethods
     def add_deck
+      return nil if Okubo::Deck.exists?(:user_id => self.id, :user_type => self.class.name)
       d = Okubo::Deck.create!(:user_id => self.id, :user_type => self.class.name)
       self.class.send(:define_method, self.deck_name) do
         Okubo::Deck.first(:conditions => {:user_id => self.id, :user_type => self.class.name})

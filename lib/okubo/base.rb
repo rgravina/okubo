@@ -10,7 +10,7 @@ module Okubo
       define_method(:deck_name){name}
       include Okubo::DeckMethods
       include Okubo::ItemMethods
-      after_create(:add_deck)
+      after_save(:add_deck)
       after_destroy(:remove_deck)
     end
   end
