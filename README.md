@@ -104,6 +104,11 @@ user.words.known #=> []
 user.words.expired #=> [word]
 ```
 
+Examples
+--------
+
+[Chuhi](https://github.com/rgravina/chihi) is a Rails app which uses Okubo to schedule words. Have a look at the project source for real world usage. You can also [use the app online](http://chuhi.herokuapp.com/)!
+
 Thanks!
 -------
 
