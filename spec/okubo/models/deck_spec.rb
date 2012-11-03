@@ -13,6 +13,15 @@ describe Okubo::Deck do
       @user.words.should == [@word]
     end
 
+    it "should be an iterator of words" do
+      @user.words << @word
+      a = []
+      @user.words.each do |w|
+        a << w
+      end
+      a.should == [@word]
+    end
+
     it "should raise an error if a duplicate word exists" do
       @user.words << @word
       @user.words.should == [@word]

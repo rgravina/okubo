@@ -1,9 +1,20 @@
 module Okubo
   class Deck < ActiveRecord::Base
+    include Enumerable
     self.table_name = "okubo_decks"
     belongs_to :user, :polymorphic => true
     has_many :items, :class_name => "Okubo::Item", :dependent => :destroy
-    
+
+    def each &block
+      _items.each do |item|
+        if block_given?
+          block.call item
+        else
+          yield item
+        end
+      end
+    end
+
     def self.add_deck(user)
       create!(user)
     end
@@ -14,6 +25,10 @@ module Okubo
       else
         source_class.find(self.items.pluck(:source_id)) == other
       end
+    end
+
+    def _items
+      source_class.find(self.items.pluck(:source_id))
     end
 
     def <<(source)
