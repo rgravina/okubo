@@ -1,5 +1,7 @@
 module Okubo
   class Item < ActiveRecord::Base
+    attr_accessible :deck, :source_id, :source_type
+
     self.table_name = "okubo_items"
     belongs_to :deck
     belongs_to :source, :polymorphic => true
