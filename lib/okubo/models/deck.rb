@@ -5,7 +5,7 @@ module Okubo
     belongs_to :user, :polymorphic => true
     has_many :items, :class_name => "Okubo::Item", :dependent => :destroy
 
-    def each &block
+    def each(&block)
       _items.each do |item|
         if block_given?
           block.call item
@@ -15,16 +15,8 @@ module Okubo
       end
     end
 
-    def self.add_deck(user)
-      create!(user)
-    end
-
     def ==(other)
-      if other.respond_to?(:items)
-        source_class.find(self.items.pluck(:source_id)) == other.items
-      else
-        source_class.find(self.items.pluck(:source_id)) == other
-      end
+      _items == other
     end
 
     def _items
@@ -36,17 +28,13 @@ module Okubo
       self.items << Okubo::Item.new(:deck => self, :source_id => source.id, :source_type => source.class.name)
     end
 
-    def count
-      self.items.count
+    def self.add_deck(user)
+      create!(user)
     end
 
     def delete(source)
       item = Okubo::Item.new(:deck => self, :source_id => source.id, :source_type => source.class.name)
       item.destroy
-    end
-
-    def include?(source)
-      Okubo::Item.exists?(:deck_id => self.id, :source_id => source.id, :source_type => source.class.name)
     end
 
     def untested
