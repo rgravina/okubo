@@ -29,6 +29,8 @@ describe Okubo::Item do
       @user.wrong_answer_for!(@word)
       @user.words.untested.should == []
       @user.words.failed.should == [@word]
+      stats = Okubo::Item.first(:conditions => {:source_id => @word.id, :source_type => @word.class.name})
+      stats.times_wrong.should == 1
     end
   end
 
@@ -43,9 +45,11 @@ describe Okubo::Item do
       @user.right_answer_for!(@word)
       stats = Okubo::Item.first(:conditions => {:source_id => @word.id, :source_type => @word.class.name})
       stats.next_review.should == Time.now + 3.days
+      stats.times_right.should == 1
       @user.right_answer_for!(@word)
       stats.reload
       stats.next_review.should == Time.now + 7.days
+      stats.times_right.should == 2
       @user.right_answer_for!(@word)
       stats.reload
       stats.next_review.should == Time.now + 14.days

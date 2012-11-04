@@ -14,6 +14,7 @@ module Okubo
 
     def right!
       self[:box] += 1
+      self.times_right += 1
       self.last_reviewed = Time.now
       self.next_review = last_reviewed + DELAYS[[DELAYS.count, box].min-1].days
       self.save!
@@ -21,6 +22,7 @@ module Okubo
 
     def wrong!
       self[:box] = 0
+      self.times_wrong += 1
       self.last_reviewed = Time.now
       self.next_review = nil
       self.save!

@@ -15,6 +15,7 @@ class OkuboGenerator < Rails::Generators::Base
 
   def create_migration_files
     create_migration_file_if_not_exist 'create_okubo_tables'
+    create_migration_file_if_not_exist 'add_okubo_item_answer_counts'
   end
 
   private
