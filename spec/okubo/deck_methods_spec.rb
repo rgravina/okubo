@@ -12,6 +12,11 @@ describe Okubo::DeckMethods do
       it "should return an empty list when empty" do
         @user.words.should == []
       end
+
+      it "should allow access of word stats" do
+        @user.words << @word
+        @word.stats
+      end
     end
   end
 end

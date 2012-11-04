@@ -29,43 +29,41 @@ describe Okubo::Item do
       @user.wrong_answer_for!(@word)
       @user.words.untested.should == []
       @user.words.failed.should == [@word]
-      stats = Okubo::Item.first(:conditions => {:source_id => @word.id, :source_type => @word.class.name})
-      stats.times_wrong.should == 1
+      @word.stats.times_wrong.should == 1
     end
   end
 
   context "Study schedule" do
     it "when untested, next study time should be nil" do
-      stats = Okubo::Item.first(:conditions => {:source_id => @word.id, :source_type => @word.class.name})
-      stats.next_review.should be_nil
+      @word.stats.next_review.should be_nil
     end
 
     it "when correct, next study time should gradually increase" do
-      Timecop.freeze
-      @user.right_answer_for!(@word)
-      stats = Okubo::Item.first(:conditions => {:source_id => @word.id, :source_type => @word.class.name})
-      stats.next_review.should == Time.now + 3.days
-      stats.times_right.should == 1
-      @user.right_answer_for!(@word)
-      stats.reload
-      stats.next_review.should == Time.now + 7.days
-      stats.times_right.should == 2
-      @user.right_answer_for!(@word)
-      stats.reload
-      stats.next_review.should == Time.now + 14.days
-      @user.right_answer_for!(@word)
-      stats.reload
-      stats.next_review.should == Time.now + 30.days
-      @user.right_answer_for!(@word)
-      stats.reload
-      stats.next_review.should == Time.now + 60.days
-      @user.right_answer_for!(@word)
-      stats.reload
-      stats.next_review.should == Time.now + 120.days
-      @user.right_answer_for!(@word)
-      stats.reload
-      stats.next_review.should == Time.now + 240.days
-      Timecop.return
+      Timecop.freeze(Time.now) do
+        @user.right_answer_for!(@word)
+        stats = @word.stats
+        stats.next_review.should == Time.now + 3.days
+        stats.times_right.should == 1
+        @user.right_answer_for!(@word)
+        stats.reload
+        stats.next_review.should == Time.now + 7.days
+        stats.times_right.should == 2
+        @user.right_answer_for!(@word)
+        stats.reload
+        stats.next_review.should == Time.now + 14.days
+        @user.right_answer_for!(@word)
+        stats.reload
+        stats.next_review.should == Time.now + 30.days
+        @user.right_answer_for!(@word)
+        stats.reload
+        stats.next_review.should == Time.now + 60.days
+        @user.right_answer_for!(@word)
+        stats.reload
+        stats.next_review.should == Time.now + 120.days
+        @user.right_answer_for!(@word)
+        stats.reload
+        stats.next_review.should == Time.now + 240.days
+      end
     end
 
     it "words should expire and move from known to expired" do
