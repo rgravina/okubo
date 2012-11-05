@@ -37,6 +37,22 @@ module Okubo
       item.destroy
     end
 
+    #
+    # Returns a suggested word to review next.
+    # First, a random untested word, ten failed, then expired
+    #
+    def review_next
+      if self.items.untested.count > 0
+        source_class.find(self.items.untested.order('random()').first.source_id)
+      elsif self.items.failed.count > 0
+        source_class.find(self.items.failed.order('random()').first.source_id)
+      elsif self.items.pending.count > 0
+        source_class.find(self.items.pending.order('random()').first.source_id)
+      else
+        nil
+      end
+    end
+
     def untested
       source_class.find(self.items.untested.pluck(:source_id))
     end

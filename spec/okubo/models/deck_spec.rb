@@ -35,6 +35,21 @@ describe Okubo::Deck do
     end
   end
 
+  context "Reviewing" do
+    it "should choose a random word from untested, failed or pending" do
+      @user.words << @word
+      @user.words.review_next.should == @word
+      word = Word.create!(:kanji => "日本語", :kana => "にほんご", :translation => "Japanese language")
+      @user.words << word
+      [@word, word].include?(@user.words.review_next).should be_true
+      @user.right_answer_for!(@word)
+      [word].include?(@user.words.review_next).should be_true
+      @user.wrong_answer_for!(@word)
+      @user.right_answer_for!(word)
+      [@word].include?(@user.words.review_next).should be_true
+    end
+  end
+
   context "Cleaning up" do
     it "should delete itself and all item information when the source model is deleted" do
       deck = @user.words
