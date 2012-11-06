@@ -49,24 +49,23 @@ This gives your user a deck of words to study, initially empty:
 user.words #=> []
 ```
 
-Adding words to the deck adds it to the word list. It also belongs to the 'untested' stack:
+From here you can add words, and record attempts to guess the word as right or wrong. Various scopes exist to allow you to display counts or lists to the user:
 
 ```ruby
+# Initally adding a word
 user.words << word
 user.words #=> [word]
 user.words.untested #=> [word]
-```
 
-These words can be studied immediately. Answering a word correctly moves it out of the 'untested' stack
-and into your list of 'known' words.
-
-```ruby
+# Guessing a word correctly
 user.right_answer_for!(word)
-user.words.untested #=> []
 user.words.known #=> [word]
-```
 
-As time passes, words 'expire' and require you to review them to ensure you still remember them:
+# Guessing a word incorrectly
+user.wrong_answer_for!(word)
+user.words.failed #=> [word]
+```
+As time passes, words need to be reviewed to keep them fresh in memory:
 
 ```ruby
 # Three days later...
@@ -74,8 +73,7 @@ user.words.known #=> []
 user.words.expired #=> [word]
 ```
 
-Answering a word correcly several times in a row results in the word taking longer to 'expire'.
-This spaced repetition helps ensure the word stays in your long term memory without needless repetition.
+Guessing a word correcly several times in a row results in the word taking longer to 'expire'. This is the heart of a spaced repetiton system.
 
 ```ruby
 user.right_answer_for!(word)
@@ -89,19 +87,17 @@ user.right_answer_for!(word)
 user.words.expired #=> [word]
 ```
 
-Finally, answering a word incorrectly moves it into the 'failed' stack. The word can then be
-studied at any time (similar to words in the 'untested' stack) which puts it back in the review
-cycle.
+Reviewing
+---------
+
+In addition to an 'expired' scope, Okubo provides a suggested reviewing sequece. A word is randomly chosen from untested words first, then if all have been studied, from failed, and finally expired. If no words remain to be studied, nil is returned:
 
 ```ruby
-user.wrong_answer_for!(word)
-user.words.failed #=> [word]
+user.words.review_next #=> word
 user.right_answer_for!(word)
-user.words.failed #=> []
-user.words.known #=> [word]
-# Three days later...
-user.words.known #=> []
-user.words.expired #=> [word]
+# ... continuing until all untested, failed, and expired words have been guessed correctly.
+user.words.review_next = nil
+
 ```
 
 Examples
