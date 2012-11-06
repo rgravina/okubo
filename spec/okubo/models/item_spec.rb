@@ -42,27 +42,27 @@ describe Okubo::Item do
       Timecop.freeze(Time.now) do
         @user.right_answer_for!(@word)
         stats = @word.stats
-        stats.next_review.should == Time.now + 3.days
+        stats.next_review.should == stats.last_reviewed + 3.days
         stats.times_right.should == 1
         @user.right_answer_for!(@word)
         stats.reload
-        stats.next_review.should == Time.now + 7.days
+        stats.next_review.should == stats.last_reviewed + 7.days
         stats.times_right.should == 2
         @user.right_answer_for!(@word)
         stats.reload
-        stats.next_review.should == Time.now + 14.days
+        stats.next_review.should == stats.last_reviewed + 14.days
         @user.right_answer_for!(@word)
         stats.reload
-        stats.next_review.should == Time.now + 30.days
+        stats.next_review.should == stats.last_reviewed + 30.days
         @user.right_answer_for!(@word)
         stats.reload
-        stats.next_review.should == Time.now + 60.days
+        stats.next_review.should == stats.last_reviewed + 60.days
         @user.right_answer_for!(@word)
         stats.reload
-        stats.next_review.should == Time.now + 120.days
+        stats.next_review.should == stats.last_reviewed + 120.days
         @user.right_answer_for!(@word)
         stats.reload
-        stats.next_review.should == Time.now + 240.days
+        stats.next_review.should == stats.last_reviewed + 240.days
       end
     end
 
