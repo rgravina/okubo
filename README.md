@@ -97,7 +97,6 @@ user.words.review_next #=> word
 user.right_answer_for!(word)
 # ... continuing until all untested, failed, and expired words have been guessed correctly.
 user.words.review_next = nil
-
 ```
 
 Examples
