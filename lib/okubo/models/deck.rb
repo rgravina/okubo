@@ -46,8 +46,8 @@ module Okubo
         source_class.find(self.items.untested.order('random()').first.source_id)
       elsif self.items.failed.count > 0
         source_class.find(self.items.failed.order('random()').first.source_id)
-      elsif self.items.pending.count > 0
-        source_class.find(self.items.pending.order('random()').first.source_id)
+      elsif self.items.expired.count > 0
+        source_class.find(self.items.expired.order('random()').first.source_id)
       else
         nil
       end

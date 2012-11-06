@@ -47,6 +47,12 @@ describe Okubo::Deck do
       @user.wrong_answer_for!(@word)
       @user.right_answer_for!(word)
       [@word].include?(@user.words.review_next).should be_true
+      @user.right_answer_for!(@word)
+      @user.words.review_next.should be_nil
+      @user.words.expired.empty?.should be_true
+      Timecop.freeze(Time.now + 4.days) do
+        [@word, word].include?(@user.words.review_next).should be_true
+      end
     end
   end
 
