@@ -49,7 +49,7 @@ This gives your user a deck of words to study, initially empty:
 user.words #=> []
 ```
 
-From here you can add words, and record attempts to guess the word as right or wrong. Various scopes exist to allow you to display counts or lists to the user:
+From here you can add words, and record attempts to guess the word as right or wrong. Various methods exist to allow you to display counts or lists to the user:
 
 ```ruby
 # Initally adding a word
@@ -90,7 +90,7 @@ user.words.expired #=> [word]
 Reviewing
 ---------
 
-In addition to an 'expired' scope, Okubo provides a suggested reviewing sequece. A word is randomly chosen from untested words first, then if all have been studied, from failed, and finally expired. If no words remain to be studied, nil is returned:
+In addition to an 'expired' method, Okubo provides a suggested reviewing sequece. A word is randomly chosen from untested words first, then if all have been studied, from failed, and finally expired. If no words remain to be studied, nil is returned:
 
 ```ruby
 user.words.review_next #=> word
