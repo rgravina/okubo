@@ -2,12 +2,12 @@ Okubo [![Build Status](https://travis-ci.org/rgravina/okubo.png)](https://travis
 =====
 
 Okubo is a simple spaced-repetition system which you can associate with Active Record models to be learned
-(words in a foreign language, capital cities of the world etc.) and users in your system, Users study these 
-words, and as they mark these attempts "right" or "wrong", Okubo will determine when they should be reviewed
+(such as words in a foreign language) and users in your system. Users study these 
+words, and as they mark these attempts right or wrong, Okubo will determine when they should be reviewed
 next.
 
-Okubo schedules items into boxes and uses this to determine the next study time for an item, based on the [Leitner System](http://en.wikipedia.org/wiki/Leitner_system).
-In the future it may support other popular algorithms, such as the Supermemo 2 algorithm (SM2).
+Okubo determines the next study time for an item using the [Leitner System](http://en.wikipedia.org/wiki/Leitner_system).
+In the future it may support other popular algorithms, such as the Supermemo 2 algorithm.
 
 Installation
 ------------
@@ -29,7 +29,8 @@ rake db:migrate
 Quick Start
 -----------
 
-Imagine you have an application allowing your users to study words in a foreign language. You can set this up as follows:
+Assume you have an application allowing your users to study words in a foreign language. Using the <code>has_deck</code> method
+you can set up a deck of flashcards that the user will study:
 
 ```ruby
 class Word < ActiveRecord::Base
@@ -43,18 +44,11 @@ user = User.create!(:name => "Robert")
 word = Word.create!(:kanji => "日本語", :kana => "にほんご", :translation => "Japanese language")
 ```
 
-This gives your user a deck of words to study, initially empty:
-
-```ruby
-user.words #=> []
-```
-
-From here you can add words, and record attempts to guess the word as right or wrong. Various methods exist to allow you to display counts or lists to the user:
+You can add words and record attempts to guess the word as right or wrong. Various methods exist to allow you to access subsets of this collection:
 
 ```ruby
 # Initally adding a word
 user.words << word
-user.words #=> [word]
 user.words.untested #=> [word]
 
 # Guessing a word correctly
@@ -64,8 +58,12 @@ user.words.known #=> [word]
 # Guessing a word incorrectly
 user.wrong_answer_for!(word)
 user.words.failed #=> [word]
+
+# Listing all words
+user.words #=> [word]
 ```
-As time passes, words need to be reviewed to keep them fresh in memory:
+
+As time passes words need to be reviewed to keep them fresh in memory:
 
 ```ruby
 # Three days later...
@@ -90,7 +88,9 @@ user.words.expired #=> [word]
 Reviewing
 ---------
 
-In addition to an 'expired' method, Okubo provides a suggested reviewing sequece. A word is randomly chosen from untested words first, then if all have been studied, from failed, and finally expired. If no words remain to be studied, nil is returned:
+In addition to an <code>expired</code> method, Okubo provides a suggested reviewing sequece.
+A word is randomly chosen from all untested words first, followed by studied, failed, and finally expired in order of precedence. 
+If no words remain to be studied nil is returned:
 
 ```ruby
 user.words.review_next #=> word
@@ -102,7 +102,7 @@ user.words.review_next = nil
 Examples
 --------
 
-[Chuhi](https://github.com/rgravina/chuhi) is a Rails app which uses Okubo to schedule words. Have a look at the project source for real world usage. You can also [use the app online](http://chuhi.herokuapp.com/)!
+[Chuhi](https://github.com/rgravina/chuhi) is a Rails application which uses Okubo to schedule words. Have a look at the project source for real world usage. You can also [use the app online](http://chuhi.herokuapp.com/)!
 
 Thanks!
 -------
