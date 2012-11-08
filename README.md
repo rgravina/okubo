@@ -73,7 +73,7 @@ user.words.known #=> []
 user.words.expired #=> [word]
 ```
 
-Guessing a word correcly several times in a row results in the word taking longer to 'expire'. This is the heart of a spaced repetiton system.
+Guessing a word correcly several times in a row results in the word taking longer to expire, and demonstrates mastery of that word.
 
 ```ruby
 user.right_answer_for!(word)
