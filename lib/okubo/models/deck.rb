@@ -38,18 +38,11 @@ module Okubo
     end
 
     #
-    # Returns a suggested word to review next.
-    # First, a random untested word, ten failed, then expired
+    # Returns a suggested word review sequence.
     #
-    def review_next
-      if self.items.untested.count > 0
-        source_class.find(self.items.untested.order('random()').first.source_id)
-      elsif self.items.failed.count > 0
-        source_class.find(self.items.failed.order('random()').first.source_id)
-      elsif self.items.expired.count > 0
-        source_class.find(self.items.expired.order('random()').first.source_id)
-      else
-        nil
+    def review
+      [:untested, :failed, :expired].inject([]) do |words, s| 
+        words += self.items.send(s).order('random()').map(&:source)
       end
     end
 

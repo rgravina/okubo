@@ -36,23 +36,22 @@ describe Okubo::Deck do
   end
 
   context "Reviewing" do
-    it "should choose a random word from untested, failed or pending" do
+    it "should return an array of words to review" do
       @user.words << @word
-      @user.words.review_next.should == @word
-      word = Word.create!(:kanji => "日本語", :kana => "にほんご", :translation => "Japanese language")
-      @user.words << word
-      [@word, word].include?(@user.words.review_next).should be_true
-      @user.right_answer_for!(@word)
-      [word].include?(@user.words.review_next).should be_true
-      @user.wrong_answer_for!(@word)
-      @user.right_answer_for!(word)
-      [@word].include?(@user.words.review_next).should be_true
-      @user.right_answer_for!(@word)
-      @user.words.review_next.should be_nil
-      @user.words.expired.empty?.should be_true
-      Timecop.freeze(Time.now + 4.days) do
-        [@word, word].include?(@user.words.review_next).should be_true
+      @user.words << Word.create!(:kanji => "日本語1", :kana => "にほんご1", :translation => "Japanese language")
+      @user.words.known.count.should == 0
+      (@user.words.untested + @user.words.failed + @user.words.expired).sort.should == @user.words.review.sort
+    end
+
+    it "marking words right/wrong" do
+      @user.words << @word
+      @user.words << Word.create!(:kanji => "日本語1", :kana => "にほんご1", :translation => "Japanese language")
+      @user.words.count.should == 2
+      @user.words.review.count.should == 2
+      @user.words.review.each_with_index do |word, index|
+        index.even? ? @user.right_answer_for!(word) : @user.wrong_answer_for!(word)
       end
+      @user.words.review.count.should == 1
     end
   end
 

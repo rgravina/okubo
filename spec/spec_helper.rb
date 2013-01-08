@@ -46,6 +46,9 @@ end
 
 # Test application models
 class Word < ActiveRecord::Base
+  def to_s
+    "#{kanji} (#{kana}) - #{translation}"
+  end
 end
 
 class User < ActiveRecord::Base

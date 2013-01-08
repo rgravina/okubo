@@ -88,15 +88,14 @@ user.words.expired #=> [word]
 Reviewing
 ---------
 
-In addition to an <code>expired</code> method, Okubo provides a suggested reviewing sequece.
-A word is randomly chosen from all untested words first, followed by studied, failed, and finally expired in order of precedence. 
-If no words remain to be studied nil is returned:
+In addition to an <code>expired</code> method, Okubo provides a suggested reviewing sequence for all unknown words in the deck.
+A word is randomly chosen from all untested words, failed, and finally expired in order of precedence. 
 
 ```ruby
-user.words.review_next #=> word
+user.words.review #=> [word]
 user.right_answer_for!(word)
 # ... continuing until all untested, failed, and expired words have been guessed correctly.
-user.words.review_next = nil
+user.words.review #=> []
 ```
 
 Examples
