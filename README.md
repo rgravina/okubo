@@ -89,7 +89,7 @@ Reviewing
 ---------
 
 In addition to an <code>expired</code> method, Okubo provides a suggested reviewing sequence for all unknown words in the deck.
-A word is randomly chosen from all untested words, failed, and finally expired in order of precedence. 
+Words are randomly chosen from all untested words, failed, and finally expired in order of precedence. 
 
 ```ruby
 user.words.review #=> [word]
