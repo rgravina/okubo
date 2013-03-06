@@ -1,4 +1,4 @@
-Okubo [![Build Status](https://travis-ci.org/rgravina/okubo.png)](https://travis-ci.org/rgravina/okubo) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/rgravina/okubo)
+Okubo [![Build Status](https://travis-ci.org/rgravina/okubo.png)](https://travis-ci.org/rgravina/okubo) [![Code Climate](https://codeclimate.com/github/rgravina/okubo.png)](https://codeclimate.com/github/rgravina/okubo)
 =====
 
 Okubo is a simple spaced-repetition system which you can associate with Active Record models to be learned
