@@ -2,8 +2,8 @@ Okubo [![Build Status](https://travis-ci.org/rgravina/okubo.png)](https://travis
 =====
 
 Okubo is a simple spaced-repetition system which you can associate with Active Record models to be learned
-(such as words in a foreign language) and users in your system. Users study these 
-words, and as they mark these attempts right or wrong, Okubo will determine when they should be reviewed
+(such as words in a foreign language) and users in your system. Users study these
+and as they mark these attempts right or wrong, Okubo will determine when they should be reviewed
 next.
 
 Okubo determines the next study time for an item using the [Leitner System](http://en.wikipedia.org/wiki/Leitner_system).
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   has_deck :words
 end
 
-user = User.create!(:name => "Robert")
+user = User.create!(:name => "Student")
 word = Word.create!(:kanji => "日本語", :kana => "にほんご", :translation => "Japanese language")
 ```
 
@@ -96,6 +96,56 @@ user.words.review #=> [word]
 user.right_answer_for!(word)
 # ... continuing until all untested, failed, and expired words have been guessed correctly.
 user.words.review #=> []
+```
+
+Study Sessions
+--------------
+
+Okubo allows you to review sets of words in "study sessions". New words added to the deck or words which later expire do not get added to study sessions.
+
+```ruby
+user.words.sessions #-> []
+session = user.words.start_session! # by default, all words ready for review will be in the session
+session.review do |word|
+ # ...
+end
+```
+
+To enable users to study in short bursts, supply a size on the review set.
+
+```ruby
+session = user.words.start_session!(:size => 5)
+session.review do |word|
+ # ...
+end
+```
+Study sessions are persisted to the database and can be continued at any time.
+
+```ruby
+session = user.words.start_session!(10)
+session.size # 10
+user.right_answer_for!(session.words.first)
+user.right_answer_for!(session.words.second)
+# some time later ...
+session = user.words.sessions.first
+session.size # 10
+```
+Study sessions also track progress and will report when finished.
+
+```ruby
+session = user.words.start_session!(10)
+session.size # 10
+user.right_answer_for!(session.words.first)
+user.right_answer_for!(session.words.second)
+session.progress # 20 (%)
+user.wrong_answer_for!(session.words.third) # incorrect answers also progress the user through the session
+session.progress # 30 (%)
+# after all answered
+session.progress # 100 (%)
+session.complete? # true
+session.right # e.g. 4
+session.wrong # e.g. 6
+session.score # e.g. 60 (%)
 ```
 
 Examples
