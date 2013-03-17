@@ -46,6 +46,15 @@ module Okubo
       end
     end
 
+    def next
+      word = nil
+      [:untested, :failed, :expired].each do |category|
+        word = self.items.send(category).order('random()').limit(1).map(&:source).first
+        break if word
+      end
+      word
+    end
+
     def untested
       source_class.find(self.items.untested.pluck(:source_id))
     end

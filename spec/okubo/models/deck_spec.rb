@@ -53,6 +53,19 @@ describe Okubo::Deck do
       end
       @user.words.review.count.should == 1
     end
+
+    it "should allow you to get one word only" do
+      @user.words << @word
+      @user.words << Word.create!(:kanji => "日本語1", :kana => "にほんご1", :translation => "Japanese language")
+      @user.words.known.count.should == 0
+      word = @user.words.next
+      @user.words.untested.include?(word).should be_true
+      @user.right_answer_for!(word)
+      word = @user.words.next
+      @user.words.untested.include?(word).should be_true
+      @user.right_answer_for!(word)
+      @user.words.next.should be_nil
+    end
   end
 
   context "Cleaning up" do

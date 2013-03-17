@@ -98,6 +98,15 @@ user.right_answer_for!(word)
 user.words.review #=> []
 ```
 
+You can also just get the next word to review:
+
+```ruby
+user.words.next #=> word
+user.right_answer_for!(word)
+# ... continuing until all untested, failed, and expired words have been guessed correctly.
+user.words.next #=> nil
+```
+
 Examples
 --------
 
