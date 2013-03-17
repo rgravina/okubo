@@ -55,6 +55,10 @@ module Okubo
       word
     end
 
+    def last
+      self.items.order('created_at desc').limit(1).first.try(:source)
+    end
+
     def untested
       source_class.find(self.items.untested.pluck(:source_id))
     end

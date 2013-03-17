@@ -33,6 +33,11 @@ describe Okubo::Deck do
       @user.words.include?(@word).should be_false
       @word.destroyed?.should be_false
     end
+
+    it "should tell you what word was last added to the deck" do
+      @user.words << @word
+      @user.words.last.should == @word
+    end
   end
 
   context "Reviewing" do
