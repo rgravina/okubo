@@ -14,7 +14,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Okubo::VERSION
 
-  gem.add_development_dependency 'activerecord'
+  gem.add_runtime_dependency 'activesupport'
+  gem.add_runtime_dependency 'activerecord'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'rdoc'

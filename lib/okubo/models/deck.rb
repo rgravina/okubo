@@ -1,6 +1,7 @@
 module Okubo
   class Deck < ActiveRecord::Base
     include Enumerable
+    include Okubo::Base
     self.table_name = "okubo_decks"
     belongs_to :user, :polymorphic => true
     has_many :items, :class_name => "Okubo::Item", :dependent => :destroy
