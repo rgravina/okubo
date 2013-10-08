@@ -3,8 +3,8 @@ module Okubo
     self.table_name = "okubo_items"
     belongs_to :deck
     belongs_to :source, :polymorphic => true
-    scope :untested, :conditions => {:box => 0, :last_reviewed => nil}
-    scope :failed, :conditions => ["box = ? and last_reviewed is not null", 0]
+    scope :untested, lambda{where(["box = ? and last_reviewed is null", 0])}
+    scope :failed, lambda{where(["box = ? and last_reviewed is not null", 0])}
     scope :known, lambda{where(["box > ? and next_review > ?", 0, Time.now])}
     scope :expired, lambda{where(["box > ? and next_review <= ?", 0, Time.now])}
 
