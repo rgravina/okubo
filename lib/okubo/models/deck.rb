@@ -43,14 +43,14 @@ module Okubo
     #
     def review
       [:untested, :failed, :expired].inject([]) do |words, s| 
-        words += self.items.send(s).order('random()').map(&:source)
+        words += self.items.send(s).order( ActiveRecord::Base.connection.instance_of?(ActiveRecord::ConnectionAdapters::Mysql2Adapter) ? 'RAND()' : 'random()' ).map(&:source)
       end
     end
 
     def next
       word = nil
       [:untested, :failed, :expired].each do |category|
-        word = self.items.send(category).order('random()').limit(1).map(&:source).first
+        word = self.items.send(category).order( ActiveRecord::Base.connection.instance_of?(ActiveRecord::ConnectionAdapters::Mysql2Adapter) ? 'RAND()' : 'random()' ).limit(1).map(&:source).first
         break if word
       end
       word
