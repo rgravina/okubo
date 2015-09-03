@@ -10,7 +10,7 @@ describe Okubo::DeckMethods do
   context "Decks" do
     describe "#words" do
       it "should return an empty list when empty" do
-        @user.words.should == []
+        expect(@user.words).to eq([])
       end
 
       it "should allow access of word stats" do
