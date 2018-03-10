@@ -2,7 +2,7 @@ Okubo [![Build Status](https://travis-ci.org/rgravina/okubo.png)](https://travis
 =====
 
 Okubo is a simple spaced-repetition system which you can associate with Active Record models to be learned
-(such as words in a foreign language) and users in your system. Users study these 
+(such as words in a foreign language) and users in your system. Users study these
 words, and as they mark these attempts right or wrong, Okubo will determine when they should be reviewed
 next.
 
@@ -15,7 +15,7 @@ Installation
 Add to Gemfile (will put on rubygems once at 0.1):
 
 ```
-gem 'okubo', :git => "git://github.com/rgravina/okubo.git"
+gem 'okubo', git: 'https://github.com/rgravina/okubo.git'
 ```
 
 Run:
@@ -89,7 +89,7 @@ Reviewing
 ---------
 
 In addition to an <code>expired</code> method, Okubo provides a suggested reviewing sequence for all unknown words in the deck.
-Words are randomly chosen from all untested words, failed, and finally expired in order of precedence. 
+Words are randomly chosen from all untested words, failed, and finally expired in order of precedence.
 
 ```ruby
 user.words.review #=> [word]
